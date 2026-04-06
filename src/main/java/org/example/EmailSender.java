@@ -13,9 +13,9 @@ public class EmailSender {
     public static void main(String[] args) {
         String myEmail = "thietvo02@gmail.com";
         String appPassword = "fknw bvhw hstn qivz";
-        String teacherEmail = "phandinhlong@hcmuaf.edu.vn";
+        String teacherEmail = "23130314@st.hcmuaf.edu.vn";
 
-        LocalDateTime targetTime = LocalDateTime.of(2026, 4, 6, 23, 59, 58);
+        LocalDateTime targetTime = LocalDateTime.of(2026, 4, 7, 0, 7, 58);
         long targetMillis = targetTime.atZone(ZoneId.systemDefault()).toInstant().toEpochMilli();
 
         Properties props = new Properties();

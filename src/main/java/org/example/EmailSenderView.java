@@ -6,41 +6,63 @@ import java.awt.*;
 public class EmailSenderView extends JFrame {
 
     public EmailSenderView() {
+        setTitle("Email Sender");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setSize(550, 450);
         init();
+        setLocationRelativeTo(null);
+        setVisible(true);
     }
 
     public void init() {
-        JPanel main =  new JPanel();
-        BorderLayout mainLayout = new BorderLayout();
-        main.setLayout(mainLayout);
-        main.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
-        add(BorderLayout.CENTER, main);
+        JPanel mainPanel = new JPanel(new GridBagLayout());
+        mainPanel.setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15));
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.insets = new Insets(5, 5, 5, 5);
 
-        JPanel topPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        main.add(topPanel, BorderLayout.NORTH);
-        JLabel toLable = new JLabel("To: ");
-        topPanel.add(toLable);
+        gbc.gridx = 0; gbc.gridy = 0;
+        mainPanel.add(new JLabel("To:"), gbc);
 
+        gbc.gridx = 1; gbc.weightx = 1.0;
         JTextField toText = new JTextField();
-        topPanel.add(toText);
-        JButton sendButton = new JButton("Send");
-        topPanel.add(sendButton);
+        mainPanel.add(toText, gbc);
 
-        JPanel contentPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        main.add(contentPanel, BorderLayout.CENTER);
-        JLabel subjectLabel = new JLabel("Subject:");
-        contentPanel.add(subjectLabel);
+        gbc.gridx = 0; gbc.gridy = 1; gbc.weightx = 0;
+        mainPanel.add(new JLabel("Subject:"), gbc);
 
-        JTextArea subjectText = new JTextArea();
-        contentPanel.add(subjectText);
+        gbc.gridx = 1; gbc.weightx = 1.0;
+        JTextField subjectText = new JTextField();
+        mainPanel.add(subjectText, gbc);
 
-        JPanel bottomPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        main.add(bottomPanel, BorderLayout.SOUTH);
-        JLabel timeLabel = new JLabel("Time:");
-        contentPanel.add(timeLabel);
+        gbc.gridx = 0; gbc.gridy = 2;
+        mainPanel.add(new JLabel("Message:"), gbc);
 
-        JTextField timeText = new JTextField(); // 2026-04-26T23:01:01
-        bottomPanel.add(timeText);
+        gbc.gridx = 1; gbc.weighty = 1.0;
+        gbc.fill = GridBagConstraints.BOTH;
+        JTextArea messageBody = new JTextArea();
+        mainPanel.add(new JScrollPane(messageBody), gbc);
+
+        gbc.gridx = 0; gbc.gridy = 3; gbc.weighty = 0;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        mainPanel.add(new JLabel("Time:"), gbc);
+
+        gbc.gridx = 1;
+        JTextField timeText = new JTextField("2026-04-26T23:01:01");
+        mainPanel.add(timeText, gbc);
+
+        JPanel btnPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+        JButton btnConnect = new JButton("Connect");
+        JButton btnSend = new JButton("Send Email");
+        btnSend.setBackground(new Color(0, 123, 255));
+        btnSend.setForeground(Color.WHITE);
+
+        btnPanel.add(btnConnect);
+        btnPanel.add(btnSend);
+
+        gbc.gridx = 0; gbc.gridy = 4; gbc.gridwidth = 2;
+        mainPanel.add(btnPanel, gbc);
+
+        add(mainPanel);
     }
-
 }
